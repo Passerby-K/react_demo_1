@@ -1,4 +1,5 @@
 import React, { Component ,Fragment} from 'react';
+import './style.css'
 // Fragment //可以代替组件中的最外围标签  相当于一个占位符
 class Todolist extends Component {
     // constructor 构造函数是最先被执行的一个函数
@@ -15,8 +16,10 @@ class Todolist extends Component {
     render() {
         return (
             <Fragment>
+                {/* input框 */}
                 <div>
                     <input
+                        class="inpit"
                         placeholder='请输入内容'
                         value={this.state.inputValue}
                         // .bind(this) 改变的change() 事件 的this，让其指向组件
@@ -51,6 +54,7 @@ class Todolist extends Component {
         })
     }
     handDel(index){
+        console.log(index)
         const list=[...this.state.list]
         list.splice(index,1)
         this.setState({
