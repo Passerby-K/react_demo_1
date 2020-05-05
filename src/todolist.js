@@ -1,5 +1,8 @@
 import React, { Component ,Fragment} from 'react';
-import './style.css'
+import './style.css';
+// 引入组件
+import Todoitem from './todoitem';
+
 // Fragment //可以代替组件中的最外围标签  相当于一个占位符
 class Todolist extends Component {
     // constructor 构造函数是最先被执行的一个函数
@@ -18,8 +21,10 @@ class Todolist extends Component {
             <Fragment>
                 {/* input框 */}
                 <div>
+                    <label htmlFor="ld">输入内容：</label>
                     <input
-                        class="inpit"
+                        id="ld"
+                        className='input'
                         placeholder='请输入内容'
                         value={this.state.inputValue}
                         // .bind(this) 改变的change() 事件 的this，让其指向组件
@@ -31,9 +36,16 @@ class Todolist extends Component {
                     {
                         this.state.list.map((item ,index) =>{
                             return (
-                                <li key={index} onClick={this.handDel.bind(this,index)}>
-                                    {index+1}--{item}
-                                </li>
+                                <div>
+                                    {/*// 第一种  父组件像子组件传值 和事件*/}
+                                        <Todoitem content={item} index={index} delItem={this.handDel.bind(this)}/>
+                                    {/*// 第二种   直接写入页面上的方式*/}
+                                    {
+                                        // <li key={index} onClick={this.handDel.bind(this,index)} dangerouslySetInnerHTML={{__html:item}}>
+                                        //     {/* {index+1}--{item} */}
+                                        // </li>
+                                    }
+                                </div>
                                 )
                         })
                     }
